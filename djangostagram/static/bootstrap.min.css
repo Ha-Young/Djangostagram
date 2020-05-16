@@ -12484,3 +12484,9 @@ label,
     display: flex;
     justify-content: flex-end;
 }
+
+.my-item-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
