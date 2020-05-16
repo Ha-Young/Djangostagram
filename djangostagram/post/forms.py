@@ -16,7 +16,8 @@ class PostForm(forms.Form):
         required=True, 
         error_messages={
             'required': '내용을 입력하십시오'
-        }
+        },
+        widget=forms.Textarea,
     )
 
     tag = forms.CharField(
@@ -31,7 +32,11 @@ class PostForm(forms.Form):
         description = cleaned_data.get('description')
         tag = cleaned_data.get('tag')
 
+        
+        self.error = ""
         if not img_url:
-            self.add_error('img_url', '이미지 주소가 없습니다.')
+            self.add_error('img_url', '이미지 주소가 없습니다')
+            self.error += '이미지 주소가 없습니다\n'
         if not description:
-            self.add_error('description', '내용이 없습니다.')
+            self.add_error('description', '내용이 없습니다')
+            self.error += '내용이 없습니다\n'
