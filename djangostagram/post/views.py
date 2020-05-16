@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.views.generic import ListView
 from django.views.generic.edit import FormView
 from django.db import transaction
 
@@ -8,6 +9,11 @@ from dsuser.models import Dsuser
 from tag.models import Tag
 # Create your views here.
 
+
+class Timeline(ListView):
+    model = Post
+    template_name = 'timeline.html'
+    context_object_name = 'post_list'
 
 class UploadPost(FormView):
     model = Post
