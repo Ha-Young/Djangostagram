@@ -4,10 +4,12 @@ from django.views.generic.edit import FormView
 from django.db import transaction
 from django.core.paginator import Paginator
 from django.http import Http404
+from django.utils.decorators import method_decorator
 
 from .models import Post
 from .forms import PostForm
 from dsuser.models import Dsuser
+from dsuser.decorator import login_required
 from tag.models import Tag
 # Create your views here.
 
@@ -29,7 +31,7 @@ def timeline(request):
     return render(request, 'timeline.html', {'post_list':post_list})
 
     
-
+@method_decorator(login_required, name='dispatch')
 class UploadPost(FormView):
     model = Post
     template_name = 'upload_post.html'

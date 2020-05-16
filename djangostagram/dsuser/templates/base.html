@@ -25,14 +25,14 @@
                 <div class="collapse navbar-collapse my-nav-right" id="navbarColor01">
                     <ul class="navbar-nav">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">타임라인 <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{% url 'timeline' %}">타임라인 <span class="sr-only">(current)</span></a>
                         </li>
                         {% if request.session.user %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'logout' %}">로그아웃</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-success ml-2" href="#">글작성</a>
+                            <a class="btn btn-success ml-2" href="{% url 'upload' %}">글작성</a>
                         </li>
                         {% else %}
                         <li class="nav-item">
