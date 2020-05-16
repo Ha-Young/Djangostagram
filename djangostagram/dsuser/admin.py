@@ -5,6 +5,6 @@ from .models import Dsuser
 
 
 class DsuserAdmin(admin.ModelAdmin):
-    list_display=('user_id', 'email', 'registered_dttm')
+    list_display=('user_id', 'password', 'email', 'registered_dttm')
 
 admin.site.register(Dsuser, DsuserAdmin)
