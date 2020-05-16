@@ -12490,3 +12490,7 @@ label,
     justify-content: center;
     align-items: center;
 }
+
+.my-link-unstyle, .my-link-unstyle:hover {
+    text-decoration: none;
+}

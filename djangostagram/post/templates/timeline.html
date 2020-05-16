@@ -7,31 +7,23 @@
     </div>
 </div>
 {% endif %}
-<div class="row mt-5">
-    <div class="col-12">
-        <table class="table table-light">
-            <thead class="thead-light">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">description</th>
-                    <th scope="col">writer</th>
-                    <th scope="col">등록날자</th>
-                </tr>
-            </thead>
-            <tbody class="text-dark">
-                {% for post in post_list %}
-                <tr>
-                    <th scope="row">{{ post.id }}</th>
-                    <th scope="row">{{ post.description }}</th>
-                    <th scope="row">{{ post.writer}}</th>
-                    <th scope="row">{{ post.registered_dttm | date:'Y-m-d H:i' }}</th>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+<div class="row justify-content-around">
+{% for post in post_list %}
+  <div class="col-sm-5 mt-5">
+    <a href="/post/{{post.id}}" class="my-link-unstyle">
+        <div class="card border-primary">
+            <img class="card-img-top img-responsive fit-image" src="{{ post.img_url}}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title font-weight-bold">{{ post.description }}</h5>
+                <span class="card-text d-block">by 👤 {{ post.writer }}</span>
+                <span class="card-text d-block mb-2">created: {{ post.registered_dttm }}</span>
+            </div>
+        </div>
+    </a>
+  </div>
+{% endfor %}
 </div>
-<div class="row mt-3">
+<div class="row mt-5">
     <div class="col-12">
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
