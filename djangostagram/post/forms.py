@@ -3,6 +3,11 @@ from .models import Post
 
 
 class PostForm(forms.Form):
+
+    def __init__(self, request, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.request = request
+    
     img_url = forms.CharField(
         label="이미지 주소",
         required=True, 
