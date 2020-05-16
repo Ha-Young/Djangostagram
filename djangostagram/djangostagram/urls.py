@@ -16,9 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from dsuser.views import timeline
+from post.views import UploadPost
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', timeline, name='timeline'),
-    path('user/', include('dsuser.urls'))
+    path('user/', include('dsuser.urls')),
+    path('upload/', UploadPost.as_view(), name='upload')
 ]
