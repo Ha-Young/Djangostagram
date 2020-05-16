@@ -16,7 +16,7 @@ class PostForm(forms.Form):
         }
     )
 
-    description = forms.TextField(
+    description = forms.CharField(
         label="내용",
         required=True, 
         error_messages={
