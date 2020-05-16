@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import ListView
 from django.views.generic.edit import FormView
 from django.db import transaction
+from django.core.paginator import Paginator
 
 from .models import Post
 from .forms import PostForm
@@ -10,10 +11,21 @@ from tag.models import Tag
 # Create your views here.
 
 
-class Timeline(ListView):
-    model = Post
-    template_name = 'timeline.html'
-    context_object_name = 'post_list'
+def timeline(request):
+    all_post = Post.objects.all().order_by('-registered_dttm')
+    page = request.GET.get('p', 1)
+    paginator = Paginator(all_post, 4)
+    post_list = paginator.get_page(page)
+    
+    user_id = request.session.get('user')
+    if user_id:
+        dsuser = Dsuser.objects.get(pk=request.session.get('user'))
+        if dsuser:
+            return render(request, 'timeline.html', {'user_id': dsuser.user_id, 'post_list':post_list})
+
+    return render(request, 'timeline.html', {'post_list':post_list})
+
+    
 
 class UploadPost(FormView):
     model = Post

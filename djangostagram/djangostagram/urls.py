@@ -15,11 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from post.views import Timeline, UploadPost
+from post.views import timeline, UploadPost
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', Timeline.as_view(), name='timeline'),
+    path('', timeline, name='timeline'),
     path('user/', include('dsuser.urls')),
     path('upload/', UploadPost.as_view(), name='upload')
 ]
