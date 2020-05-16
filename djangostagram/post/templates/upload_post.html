@@ -1,16 +1,4 @@
 {% extends 'base.html' %}
-{% block header %}
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote-bs4.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote-bs4.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#id_description').summernote({
-          height:300
-        });
-        
-    });
-</script>
-{% endblock %}
 {% block contents %}
 <div class="row mt-5">
     <div class="col-12 text-center">
@@ -18,8 +6,11 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-12">
-        {{error}}
+    <div class="col-12 text-center">
+        {% for error in form.error_list %}
+        <span style="color: red;display:block">{{ error }}</span>
+        {% endfor %}
+        {{form.error}}
     </div>
 </div>
 <div class="row mt-5">
@@ -30,7 +21,7 @@
       <div class="form-group">
         <label for="{{ field.id_for_label }}">{{ field.label }}</label>
         {% ifequal field.name 'description' %}
-        <textarea class="form-control" name="{{ field.name }}" id="{{ field.id_for_label }}"> </textarea>
+        <textarea class="form-control" name="{{field.name}}" placeholder="{{field.label}}"></textarea>
         {% else %}
         <input type="{{ field.field.widget.input_type }}" class="form-control" id="{{ field.id_for_label }}"
           placeholder="{{ field.label }}" name="{{ field.name }}"/>

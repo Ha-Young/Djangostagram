@@ -18,10 +18,11 @@ class UploadPost(FormView):
     def form_valid(self, form):
         with transaction.atomic():
             tags = form.data.get('tags').split(',')
-
+            
+            print('request session user', self.request.session.get('user'))         
             new_post = Post(
                 writer=Dsuser.objects.get(pk=self.request.session.get('user')),
-                img_url=form.data.get('quantity'),
+                img_url=form.data.get('img_url'),
                 description=form.data.get('description'),
             )
             new_post.save()

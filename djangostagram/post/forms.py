@@ -25,7 +25,7 @@ class PostForm(forms.Form):
         widget=forms.Textarea,
     )
 
-    tag = forms.CharField(
+    tags = forms.CharField(
         label="태그",
         required=False,
     )
@@ -35,13 +35,13 @@ class PostForm(forms.Form):
         
         img_url = cleaned_data.get('img_url')
         description = cleaned_data.get('description')
-        tag = cleaned_data.get('tag')
+        tags = cleaned_data.get('tags')
 
         
-        self.error = ""
+        self.error_list = []
         if not img_url:
-            self.add_error('img_url', '이미지 주소가 없습니다')
-            self.error += '이미지 주소가 없습니다\n'
+            self.error_list.append('이미지 주소가 없습니다')
         if not description:
-            self.add_error('description', '내용이 없습니다')
-            self.error += '내용이 없습니다\n'
+            self.error_list.append('내용이 없습니다')
+
+        print(self.error_list)
