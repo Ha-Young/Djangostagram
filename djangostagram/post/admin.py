@@ -5,6 +5,6 @@ from .models import Post
 
 
 class PostAdmin(admin.ModelAdmin):
-    list_display=('description', 'writer', 'img_url', 'registered_dttm')
+    list_display=('id', 'description', 'writer', 'img_url', 'registered_dttm')
 
 admin.site.register(Post, PostAdmin)

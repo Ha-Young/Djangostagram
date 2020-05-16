@@ -10,7 +10,7 @@
 <div class="row justify-content-around">
 {% for post in post_list %}
   <div class="col-sm-5 mt-5">
-    <a href="/post/{{post.id}}" class="my-link-unstyle">
+    <a href="{% url 'post' pk=post.pk%}" class="my-link-unstyle">
         <div class="card border-primary">
             <img class="card-img-top img-responsive fit-image" src="{{ post.img_url}}" alt="Card image cap">
             <div class="card-body">

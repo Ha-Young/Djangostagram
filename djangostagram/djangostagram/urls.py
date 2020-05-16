@@ -20,6 +20,7 @@ from post.views import timeline, UploadPost
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', timeline, name='timeline'),
+    path('upload/', UploadPost.as_view(), name='upload'),
     path('user/', include('dsuser.urls')),
-    path('upload/', UploadPost.as_view(), name='upload')
+    path('post/', include('post.urls'))
 ]

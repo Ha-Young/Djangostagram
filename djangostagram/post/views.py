@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from django.views.generic.edit import FormView
 from django.db import transaction
 from django.core.paginator import Paginator
+from django.http import Http404
 
 from .models import Post
 from .forms import PostForm
@@ -16,10 +17,12 @@ def timeline(request):
     page = request.GET.get('p', 1)
     paginator = Paginator(all_post, 4)
     post_list = paginator.get_page(page)
+    print("post_list", post_list)
     
     user_id = request.session.get('user')
+    print(user_id)
     if user_id:
-        dsuser = Dsuser.objects.get(pk=request.session.get('user'))
+        dsuser = Dsuser.objects.get(pk=user_id)
         if dsuser:
             return render(request, 'timeline.html', {'user_id': dsuser.user_id, 'post_list':post_list})
 
@@ -60,3 +63,19 @@ class UploadPost(FormView):
             'request':self.request
         })
         return kw
+
+
+class DetailPost(DetailView):
+    model = Post
+    template_name = 'detail_post.html'
+    queryset = Post.objects.all()
+    context_object_name = 'post'
+
+    def get(self, request, *args, **kwargs):
+        try:
+            self.object = self.get_object()
+        except Http404:
+            raise Http404('게시글을 찾을 수 없습니다')
+
+        context = self.get_context_data(object=self.object)
+        return self.render_to_response(context)
